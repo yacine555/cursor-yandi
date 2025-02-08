@@ -1,0 +1,55 @@
+<svg width="120" height="30" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="120" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#FF9500"/>
+    </linearGradient>
+    
+    <!-- Clip path for the dot animation -->
+    <clipPath id="dot-clip">
+      <circle cx="90" cy="15" r="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- Main text background with subtle rounded rectangle -->
+  <rect x="2" y="5" width="116" height="20" rx="6" 
+        fill="currentColor" opacity="0.08"/>
+  
+  <!-- Stylized "y" -->
+  <path d="M15 8 L20 8 L25 15 L30 8 L35 8 L27 19 L25 30 L20 30 L22 19 L15 8Z" 
+        fill="currentColor"/>
+  
+  <!-- "andi" text -->
+  <text x="38" y="20" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="16" 
+        font-weight="600" 
+        letter-spacing="-0.02em"
+        fill="currentColor">
+    andi
+  </text>
+
+  <!-- Decorative elements -->
+  <circle cx="90" cy="15" r="4" fill="url(#gradient)">
+    <!-- Optional: Add subtle pulse animation -->
+    <animate attributeName="opacity" 
+             values="1;0.7;1" 
+             dur="2s" 
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Abstract decorative lines -->
+  <path d="M95 15 L110 15" 
+        stroke="currentColor" 
+        stroke-width="0.5" 
+        stroke-dasharray="1 2"/>
+  <path d="M95 12 L108 12" 
+        stroke="currentColor" 
+        stroke-width="0.5" 
+        stroke-dasharray="1 2"/>
+  <path d="M95 18 L106 18" 
+        stroke="currentColor" 
+        stroke-width="0.5" 
+        stroke-dasharray="1 2"/>
+</svg> 
