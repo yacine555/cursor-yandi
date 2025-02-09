@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { summarizeReadme } from '@/lib/chain';
 
 export async function POST(req: Request) {
   try {
@@ -35,16 +36,26 @@ export async function POST(req: Request) {
     }
 
     const readmeContent = await getGitHubReadme(githubUrl);
-    console.log(readmeContent);
+    
+    if (!readmeContent) {
+      return NextResponse.json({ 
+        success: false, 
+        message: 'Failed to fetch README content' 
+      }, { 
+        status: 404 
+      });
+    }
+    
+    const summary = await summarizeReadme(readmeContent);
 
     return NextResponse.json({ 
       success: true,
-      message: 'API key is valid. Summarization complete',
+      message: 'Summarization complete',
       user: {
         id: data.user_id,
         created_at: data.created_at
-      }
-      // Add your summarizer response data here
+      },
+      summary
     });
 
   } catch (error) {
