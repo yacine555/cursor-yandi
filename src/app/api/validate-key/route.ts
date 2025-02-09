@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const { data, error } = await supabase
       .from('api_keys')
       .select('id')
-      .eq('name', apiKey)
+      .eq('key', apiKey)
       .single();
 
     console.log('API key validation result:', { apiKey, data });

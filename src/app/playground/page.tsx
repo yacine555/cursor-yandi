@@ -56,11 +56,11 @@ export default function APIPlayground() {
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              placeholder="yandi-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
               required
             />
             <p className="mt-2 text-sm text-gray-500">
-              Your API key should start with 'sk-' followed by 32 characters
+              Your API key should start with 'yandi-' followed by 32 characters
             </p>
           </div>
           <button
