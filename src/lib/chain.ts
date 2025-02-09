@@ -1,5 +1,4 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import { StructuredOutputParser } from "langchain/output_parsers";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { z } from "zod";
@@ -11,42 +10,34 @@ export interface SummaryResult {
 
 export async function summarizeReadme(readmeContent: string) {
 
-  // Initialize the LLM
-  const model = new ChatAnthropic({
-    modelName: "claude-3-sonnet-20240229",
-    temperature: 0,
-  });
-
   const respSchema = z.object({
     summary: z.string().describe("A concise summary of the GitHub repository"),
     cool_facts: z.array(z.string()).describe("Interesting facts about the repository")
   });
 
-  // Create the output parser with the desired schema
-  const outputParser = StructuredOutputParser.fromZodSchema(respSchema);
+  // Initialize the LLM with structured output
+  const model = new ChatAnthropic({
+    modelName: "claude-3-5-sonnet-20241022",
+    temperature: 0,
+  }).withStructuredOutput<SummaryResult>(respSchema);
 
   // Create the prompt template
   const prompt = ChatPromptTemplate.fromTemplate(`
     Analyze this GitHub repository README content and provide a structured summary.
+    Please format your response as a JSON object with the following structure:
+    {{
+      "summary": "A concise summary of the repository",
+      "cool_facts": ["fact 1", "fact 2"]
+    }}
     
     README Content:
     {readme_content}
-    
-    Provide your response in the following format:
-    {format_instructions}
   `);
 
   // Create the chain
-  const chain = RunnableSequence.from([
-    prompt,
-    model,
-    outputParser,
-  ]);
+  const chain = RunnableSequence.from([prompt, model]);
 
-  const result = await chain.invoke({
-    readme_content: readmeContent,
-    format_instructions: outputParser.getFormatInstructions()
-  });
+  const result = await chain.invoke({ readme_content: readmeContent});
 
 
   return result;
