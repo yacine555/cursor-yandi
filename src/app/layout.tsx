@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from '@/components/Sidebar';
 import { Toaster } from 'react-hot-toast';
+import { Providers } from './providers';
 
 
 
@@ -32,13 +33,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex">
-          <Sidebar />
-          <main className="flex-1 lg:ml-20">
-            <Toaster position="top-center" />
-            {children}
-          </main>
-        </div>
+        <Providers>
+          <div className="flex">
+            <Sidebar />
+            <main className="flex-1 lg:ml-20">
+              <Toaster position="top-center" />
+              {children}
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );
