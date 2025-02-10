@@ -3,6 +3,12 @@
 import Link from 'next/link';
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from 'next/image';
+import Header from "@/components/header"
+import Hero from "@/components/hero"
+import Features from "@/components/features"
+import Pricing from "@/components/pricing"
+import Footer from "@/components/footer"
+
 
 export default function Home() {
   const { data: session } = useSession();
@@ -64,8 +70,9 @@ export default function Home() {
             </button>
           )}
         </div>
-
+        <Header />
         {/* Hero Section */}
+        <Hero />
         <div className="space-y-4">
           <h1 className="text-5xl font-bold">
             Yandi
@@ -88,6 +95,9 @@ export default function Home() {
           </Link>
         </div>
 
+        <Features />
+        <Pricing />
+        <Footer />
         {/* Built with section */}
         <div className="pt-12 mt-12 border-t">
           <p className="text-sm text-gray-500">
